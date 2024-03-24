@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All posts</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="flex justify-center items-center">
+    <div class="bg-[#F7F7F7] max-w-[90%] mx-auto">
+        {% for post in posts %}
+            <h1 class="text-3xl text-center py-4">Title: {{ post.title }}</h1>
+            <p class="text-xl text-justify">{{ post.description }}</p>
+        {% endfor %}
+    </div>
+</body>
+</html>
