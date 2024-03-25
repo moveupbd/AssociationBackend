@@ -59,3 +59,32 @@ class Member(models.Model):
     
     def __str__(self):
         return self.name
+
+
+class Slider(models.Model):
+    image = models.ImageField(upload_to='slider_images/', null=True, blank=True)
+    title = models.CharField(max_length=100, null=True, blank=True)
+    description = models.TextField(null=True, blank=True)
+    
+    def __str__(self):
+        return self.title
+    
+    
+class Event(models.Model):
+    image = models.ImageField(upload_to='event_images/', null=True, blank=True)
+    title = models.CharField(max_length=100, null=True, blank=True)
+    description = models.TextField(null=True, blank=True)
+    created_at = models.DateField(blank=True, null=True)
+    
+    def __str__(self):
+        return self.title
+    
+
+class Media(models.Model):
+    image = models.ImageField(upload_to='media_images/', null=True, blank=True)
+    title = models.CharField(max_length=100, null=True, blank=True)
+    description = models.TextField(null=True, blank=True)
+    created_at = models.DateField(blank=True, null=True)
+    
+    def __str__(self):
+        return self.title

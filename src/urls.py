@@ -23,5 +23,5 @@ from .views import hello_world
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("", hello_world, name='hello_world'),
-    path('api/', include('members.urls'))
+    path('api/', include('members.urls')),
 ]  + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
