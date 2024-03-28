@@ -21,7 +21,7 @@ from django.conf.urls.static import static
 from .views import hello_world
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('adminium/', admin.site.urls),
     path("", hello_world, name='hello_world'),
     path('api/', include('members.urls')),
 ]
