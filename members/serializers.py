@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Member, Slider, Media, Event
+from .models import Activities, Member, PhotoGallary, Slider, Media, Event
 
 class MemberSerializer(serializers.ModelSerializer):
     class Meta:
@@ -27,4 +27,17 @@ class EventSerializer(serializers.ModelSerializer):
 class MediaSerializer(serializers.ModelSerializer):
     class Meta:
         model = Media
+        fields = '__all__'
+
+
+class ActivitySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Activities
+        fields = '__all__'
+
+
+
+class PhotoGallarySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PhotoGallary
         fields = '__all__'

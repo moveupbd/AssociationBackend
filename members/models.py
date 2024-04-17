@@ -35,6 +35,7 @@ class Member(models.Model):
     name = models.CharField(max_length=50, null=True, blank=True)
     email = models.EmailField(max_length=100, null=True, blank=True)
     avatar = models.ImageField(upload_to='member_images/', null=True, blank=True)
+    cover_photo = models.ImageField(upload_to='member_images/', null=True, blank=True)
     father_name = models.CharField(max_length=50, null=True, blank=True)
     mother_name = models.CharField(max_length=50, null=True, blank=True)
     religion = models.CharField(max_length=15, null=True, blank=True)
@@ -75,6 +76,7 @@ class Event(models.Model):
     title = models.CharField(max_length=100, null=True, blank=True)
     description = models.TextField(null=True, blank=True)
     created_at = models.DateField(blank=True, null=True)
+    updated_at = models.DateField(blank=True, null=True)
     
     def __str__(self):
         return self.title
@@ -85,6 +87,23 @@ class Media(models.Model):
     title = models.CharField(max_length=100, null=True, blank=True)
     description = models.TextField(null=True, blank=True)
     created_at = models.DateField(blank=True, null=True)
+    updated_at = models.DateField(blank=True, null=True)
     
     def __str__(self):
         return self.title
+    
+class Activities(models.Model):
+    image = models.ImageField(upload_to='activites_images/', null=True, blank=True)
+    title = models.CharField(max_length=100, null=True, blank=True)
+    description = models.TextField(null=True, blank=True)
+    created_at = models.DateField(blank=True, null=True)
+    updated_at = models.DateField(blank=True, null=True)
+    
+    def __str__(self):
+        return self.title
+    
+class PhotoGallary(models.Model):
+    image = models.ImageField(upload_to='photo_gallary/', null=True, blank=True)
+
+    def __str__(self):
+        return f"PhotoGallary Image: {self.image.name}" if self.image else "PhotoGallary (No Image)"
