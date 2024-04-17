@@ -10,9 +10,26 @@ from .serializers import MemberSerializer, MemberDetailSerializer, MediaSerializ
 
 
 
+from rest_framework.generics import ListCreateAPIView
+from .models import Member
+from .serializers import MemberSerializer
+from django.db.models import Q
+
 class Members(ListCreateAPIView):
     queryset = Member.objects.all()
     serializer_class = MemberSerializer
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        search_query = self.request.query_params.get('search', None)
+
+        if search_query:
+            queryset = queryset.filter(
+                Q(name__icontains=search_query) |
+                Q(mobile_no__icontains=search_query)
+            )
+
+        return queryset
 
     
 class MemberDetail(RetrieveUpdateDestroyAPIView):
@@ -27,7 +44,7 @@ class MemberDetail(RetrieveUpdateDestroyAPIView):
     
 
 class SliderView(ListAPIView):
-    queryset = Slider.objects.all()
+    queryset = Slider.objects.order_by('-created_at')[:5]
     serializer_class = SliderSerializer
 
     
@@ -126,3 +143,33 @@ class StatsAPI(APIView):
         ip_addresses = Session.objects.filter(expire_date__gte=timezone.now()).values_list('session_key', flat=True)
         unique_visited_users_count = len(set(ip_addresses))
         return unique_visited_users_count
+
+
+
+# class Executive_committe(ListAPIView):
+#     serializer_class = MemberSerializer
+#     queryset = Member.objects.exclude(committee_position__isnull=True).exclude(committee_position__exact='')
+
+
+from itertools import chain
+from rest_framework.generics import ListAPIView
+from .models import Member
+from .serializers import MemberSerializer
+
+class Executive_committe(ListAPIView):
+    serializer_class = MemberSerializer
+
+    def get_queryset(self):
+        # Get the president
+        president = Member.objects.filter(committee_position__iexact='president')
+
+        # Get the secretary
+        secretary = Member.objects.filter(committee_position__iexact='secretary')
+
+        # Get the other committee members
+        other_members = Member.objects.exclude(committee_position__isnull=True).exclude(committee_position='').exclude(committee_position__in=['president', 'secretary'])
+
+        # Combine the querysets with correct order
+        queryset = list(president) + list(secretary) + list(other_members)
+
+        return queryset

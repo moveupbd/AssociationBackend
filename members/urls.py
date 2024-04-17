@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import Members, MemberDetail, PhotoGallaryAPI, SliderView, EventView, MediaView, EventDetail, MediaDetail, SliderDetail, StatsAPI, ActivityView, ActivityDetail
+from .views import Members, MemberDetail, PhotoGallaryAPI, SliderView, EventView, MediaView, EventDetail, MediaDetail, SliderDetail, StatsAPI, ActivityView, ActivityDetail, Executive_committe
 
 urlpatterns = [
     path('members/', Members.as_view(), name='member_list'),
@@ -14,4 +14,5 @@ urlpatterns = [
     path('activites/<int:id>', ActivityDetail.as_view(), name='media_detail'),
     path('stats/', StatsAPI.as_view(), name='stats_api'),
     path('photo-gallary/', PhotoGallaryAPI.as_view(), name='photo_gallary_api'),
+    path('executive-committe/', Executive_committe.as_view(), name='executives'),
 ]

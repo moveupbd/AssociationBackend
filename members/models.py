@@ -51,6 +51,7 @@ class Member(models.Model):
     membership_date = models.CharField(max_length=20, null=True, blank=True)
     membership_category = models.CharField(max_length=100, null=True, blank=True)
     nominee_name = models.CharField(max_length=50, null=True, blank=True)
+    committee_position = models.CharField(max_length=50, null=True, blank=True)
     nominee_relation = models.CharField(max_length=50, null=True, blank=True)
     nominee_dob = models.DateField(blank=True, null=True)
     present_job = models.CharField(max_length=100, null=True, blank=True)
@@ -66,6 +67,7 @@ class Slider(models.Model):
     image = models.ImageField(upload_to='slider_images/', null=True, blank=True)
     title = models.CharField(max_length=100, null=True, blank=True)
     description = models.TextField(null=True, blank=True)
+    created_at = models.TimeField(blank=True, null=True)
     
     def __str__(self):
         return self.title
